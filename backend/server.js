@@ -18,5 +18,5 @@ app.use('/api/food', require('./routes/food'));
 app.use('/api/reservation', require('./routes/reservation'));
 
 app.listen(port, () => {
-  console.log(`Backend listening at http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });
