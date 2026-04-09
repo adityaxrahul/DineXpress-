@@ -1,0 +1,22 @@
+export { default as Aboutchef } from "./Aboutchef";
+export { default as About } from "./About";
+export { default as Biryani } from "./Biryani";
+export { default as Burger } from "./Burger";
+export { default as Cake } from "./Cake";
+export { default as Cart } from "./Cart";
+export { default as Chicken } from "./Chicken";
+export { default as Contactsection } from "./Contactsection";
+export { default as Event } from "./Event";
+export { default as Gallery } from "./Gallery";
+export { default as Login } from "./Login";
+export { default as Menu } from "./Menu";
+export { default as Momos } from "./Momos";
+export { default as Northindian } from "./Northindian";
+export { default as Paneer } from "./Paneer";
+export { default as Pizza } from "./Pizza";
+export { default as Reservation } from "./Reservation";
+export { default as Rolls } from "./Rolls";
+export { default as Singup } from "./Singup";
+export { default as Orders } from "./Orders.jsx";
+export { default as AdminPage } from "./AdminPage.jsx";
+
