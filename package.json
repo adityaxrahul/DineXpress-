@@ -2,7 +2,12 @@
   "name": "aditya-restro-root",
   "version": "1.0.0",
   "scripts": {
-    "dev": "npm run dev --prefix Fronted",
-    "install": "npm install --prefix Fronted && npm install --prefix backend"
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run start --prefix backend\""
+  },
+  "dependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }
