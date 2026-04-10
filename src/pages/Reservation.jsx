@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function Reservation() {
-  const [formData, setFormData] = useState({ name: '', email: '', guests: '', request: '' });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    guests: "",
+    request: "",
+  });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -10,15 +15,20 @@ export default function Reservation() {
   const handleBookTable = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/reservation/book", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
+      const response = await fetch(
+        "https://dinexpress-6r1c.onrender.com/api/reservation/book",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
       const json = await response.json();
       if (json.success) {
-        alert("Table Reserved Successfully! Your reservation is stored in the database.");
-        setFormData({ name: '', email: '', guests: '', request: '' });
+        alert(
+          "Table Reserved Successfully! Your reservation is stored in the database.",
+        );
+        setFormData({ name: "", email: "", guests: "", request: "" });
       } else {
         alert("Failed to reserve table.");
       }
@@ -30,7 +40,9 @@ export default function Reservation() {
 
   return (
     <div className="reservation-page">
-      <style dangerouslySetInnerHTML={{ __html: `.reservation-page .reservation {
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `.reservation-page .reservation {
   padding: 3rem 2rem;
   margin: 2.5rem;
   box-shadow: 0 10px 28px rgba(184, 92, 56, 0.15);
@@ -74,15 +86,44 @@ export default function Reservation() {
 .reservation-page .reservation button:hover {
   background-color: #b85c38;
   color: white;
-}` }} />
-      
+}`,
+        }}
+      />
+
       <section className="reservation">
         <h2>Reserve Your Table</h2>
         <form onSubmit={handleBookTable}>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" required />
-          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Your Email" required />
-          <input type="number" name="guests" value={formData.guests} onChange={handleChange} placeholder="Number of Guests" required />
-          <textarea name="request" value={formData.request} onChange={handleChange} placeholder="Special Request" rows="4"></textarea>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Your Name"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Your Email"
+            required
+          />
+          <input
+            type="number"
+            name="guests"
+            value={formData.guests}
+            onChange={handleChange}
+            placeholder="Number of Guests"
+            required
+          />
+          <textarea
+            name="request"
+            value={formData.request}
+            onChange={handleChange}
+            placeholder="Special Request"
+            rows="4"
+          ></textarea>
           <button type="submit">Book Now</button>
         </form>
       </section>

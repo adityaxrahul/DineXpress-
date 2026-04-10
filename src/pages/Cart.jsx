@@ -8,39 +8,47 @@ export default function Cart() {
 
   const handlePlaceOrder = async () => {
     if (cart.length === 0) {
-      alert('Please add items before placing order.');
+      alert("Please add items before placing order.");
       return;
     }
 
     if (!localStorage.getItem("token")) {
-      alert('Please login to place your order.');
-      navigate('/All_Background_Component/log-in.html', { state: { returnTo: '/All_Background_Component/cart.html' } });
+      alert("Please login to place your order.");
+      navigate("/All_Background_Component/log-in.html", {
+        state: { returnTo: "/All_Background_Component/cart.html" },
+      });
       return;
     }
-    
-    const items = cart.map(c => ({ name: c.item, price: c.price }));
+
+    const items = cart.map((c) => ({ name: c.item, price: c.price }));
     const totalAmount = getTotal();
 
     try {
-      const response = await fetch("http://localhost:5000/api/order/place", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("token")
+      const response = await fetch(
+        "https://dinexpress-6r1c.onrender.com/api/order/place",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("token"),
+          },
+          body: JSON.stringify({ items, totalAmount }),
         },
-        body: JSON.stringify({ items, totalAmount })
-      });
+      );
       const json = await response.json();
-      
+
       if (json.success) {
         clearCart();
-        alert('Your order has been placed successfully in the database! Total: ₹' + totalAmount);
+        alert(
+          "Your order has been placed successfully in the database! Total: ₹" +
+            totalAmount,
+        );
       } else {
-        alert('Failed to place order.');
+        alert("Failed to place order.");
       }
     } catch (error) {
-       console.error(error);
-       alert("Error communicating with DB server.");
+      console.error(error);
+      alert("Error communicating with DB server.");
     }
   };
 
@@ -62,7 +70,7 @@ export default function Cart() {
               ))}
             </ul>
             <div className="total">Total: ₹{getTotal()}</div>
-            
+
             <button
               className="place-order"
               onClick={handlePlaceOrder}

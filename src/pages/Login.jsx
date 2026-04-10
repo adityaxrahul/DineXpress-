@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -9,18 +9,23 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://dinexpress-6r1c.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: credentials.email,
+            password: credentials.password,
+          }),
         },
-        body: JSON.stringify({ email: credentials.email, password: credentials.password })
-      });
+      );
       const json = await response.json();
       if (json.success) {
-        
-        localStorage.setItem('token', json.authtoken);
-        if (json.isAdmin) localStorage.setItem('isAdmin', 'true');
+        localStorage.setItem("token", json.authtoken);
+        if (json.isAdmin) localStorage.setItem("isAdmin", "true");
         alert("Logged in Successfully!");
         const returnTo = location.state?.returnTo || "/";
         navigate(returnTo);
@@ -29,17 +34,21 @@ export default function Login() {
       }
     } catch (error) {
       console.error(error);
-      alert("Error connecting to the server. Please ensure backend is running.");
+      alert(
+        "Error connecting to the server. Please ensure backend is running.",
+      );
     }
-  }
+  };
 
   const onChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value })
-  }
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="login-page">
-      <style dangerouslySetInnerHTML={{ __html: `.login-page * {
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `.login-page * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -120,18 +129,50 @@ export default function Login() {
 }
 .login-page .login-container a:hover {
   text-decoration: underline;
-}` }} />
-      
-  <div className="login-container">
-    <h2>Login to Aditya Resturent</h2>
-    <form id="loginForm" onSubmit={handleSubmit}>
-      <input type="email" id="email" name="email" value={credentials.email} onChange={onChange} placeholder="Enter your email" required />
-      <input type="password" id="password" name="password" value={credentials.password} onChange={onChange} placeholder="Enter your password" required />
-      <button type="submit">Log In</button>
-      <button type="button" className="skip-btn" onClick={() => navigate("/")}>Skip</button>
-    </form>
-    <p>Don't have an account? <Link to="/All_Background_Component/singup.html" state={{ returnTo: location.state?.returnTo }}>Sign up</Link></p>
-  </div>
+}`,
+        }}
+      />
+
+      <div className="login-container">
+        <h2>Login to Aditya Resturent</h2>
+        <form id="loginForm" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={credentials.email}
+            onChange={onChange}
+            placeholder="Enter your email"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={credentials.password}
+            onChange={onChange}
+            placeholder="Enter your password"
+            required
+          />
+          <button type="submit">Log In</button>
+          <button
+            type="button"
+            className="skip-btn"
+            onClick={() => navigate("/")}
+          >
+            Skip
+          </button>
+        </form>
+        <p>
+          Don't have an account?{" "}
+          <Link
+            to="/All_Background_Component/singup.html"
+            state={{ returnTo: location.state?.returnTo }}
+          >
+            Sign up
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
