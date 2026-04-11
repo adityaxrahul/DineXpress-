@@ -24,18 +24,23 @@ export default function Login() {
         }),
       });
 
-      // ❗ Handle server errors
+      // ❗ Handle server errors cleanly without crashing
       if (!response.ok) {
-        const text = await response.text();
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+           const json = await response.json();
+           alert(json.error || "Invalid credentials");
+           return;
+        }
 
-        if (response.status === 500) {
+        const text = await response.text();
+        if (response.status === 500 || response.status === 503) {
           alert(
-            "Backend error (500). Check MongoDB or JWT_SECRET on Render."
+            "Backend error or waking up. Check MongoDB on Render."
           );
           return;
         }
-
-        alert(`Server Error: ${text}`);
+        alert(`Server Error: ${response.statusText}`);
         return;
       }
 
