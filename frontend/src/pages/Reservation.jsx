@@ -23,7 +23,7 @@ export default function Reservation() {
     }
     try {
       const response = await fetch(
-        "http://localhost:5000/api/reservation/book",
+        "/api/reservation/book",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -25,7 +25,7 @@ export default function Cart() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/order/place",
+        "/api/order/place",
         {
           method: "POST",
           headers: {

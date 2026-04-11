@@ -17,7 +17,7 @@ export default function AdminPage() {
   const fetchItems = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/food/fetchall",
+        "/api/food/fetchall",
       );
       const json = await response.json();
       if (json.success) setItems(json.items);
@@ -35,7 +35,7 @@ export default function AdminPage() {
     if (isEditing) {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/food/update/${formData.id}`,
+          `/api/food/update/${formData.id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -59,7 +59,7 @@ export default function AdminPage() {
     } else {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/food/add",
+          "/api/food/add",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -96,7 +96,7 @@ export default function AdminPage() {
     if (!window.confirm("Are you sure you want to delete this item?")) return;
     try {
       const response = await fetch(
-        `http://localhost:5000/api/food/delete/${id}`,
+        `/api/food/delete/${id}`,
         { method: "DELETE" },
       );
       const json = await response.json();

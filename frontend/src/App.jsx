@@ -50,7 +50,7 @@ function Home() {
       return;
     }
     try {
-      const response = await fetch("http://localhost:5000/api/reservation/book", {
+      const response = await fetch("/api/reservation/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reservation)

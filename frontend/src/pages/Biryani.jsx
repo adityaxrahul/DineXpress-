@@ -38,7 +38,7 @@ export default function Biryani() {
     const fetchItems = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/food/fetchall",
+          "/api/food/fetchall",
         );
         const json = await response.json();
         if (json.success) {
