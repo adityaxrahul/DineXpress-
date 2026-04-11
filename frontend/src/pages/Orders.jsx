@@ -18,6 +18,14 @@ export default function Orders() {
           },
         },
       );
+      if (!response.ok) {
+        if (response.status === 401) {
+            alert("Session expired, please log in again.");
+            return;
+        }
+        alert("Render API is waking up or database is disconnected. Please refresh.");
+        return;
+      }
       const json = await response.json();
       if (json.success) {
         setOrders(json.orders);
@@ -38,14 +46,14 @@ export default function Orders() {
       style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}
     >
       <h2 style={{ color: "#b85c38", marginBottom: "20px" }}>
-        Orders Database
+        Orders
       </h2>
       {loading ? (
         <p>Loading orders...</p>
       ) : (
         <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
           {orders.length === 0 ? (
-            <p>No orders found in the database.</p>
+            <p>No order till now</p>
           ) : (
             orders.map((order, i) => (
               <div
