@@ -196,108 +196,108 @@ function Home() {
             src="https://b.zmtcdn.com/data/o2_assets/d0bd7c9405ac87f6aa65e31fe55800941632716575.png"
             alt="Pizza Image"
           />
-          <a
-            href="/All_Background_Component/pizza.html"
+          <Link
+            to="/All_Background_Component/pizza.html"
             className="pizza-button"
           >
             Pizza
-          </a>
+          </Link>
         </div>
         <div className="box">
           <img
             src="https://b.zmtcdn.com/data/dish_images/ccb7dc2ba2b054419f805da7f05704471634886169.png"
             alt="Burger Image"
           />
-          <a
-            href="/All_Background_Component/burger.html"
+          <Link
+            to="/All_Background_Component/burger.html"
             className="pizza-button"
           >
             Burger
-          </a>
+          </Link>
         </div>
         <div className="box">
           <img
             src="https://b.zmtcdn.com/data/o2_assets/bf2d0e73add1c206aeeb9fec762438111727708719.png"
             alt="Biryani Image"
           />
-          <a
-            href="/All_Background_Component/biryani.html"
+          <Link
+            to="/All_Background_Component/biryani.html"
             className="pizza-button"
           >
             Biryani
-          </a>
+          </Link>
         </div>
         <div className="box">
           <img
             src="https://b.zmtcdn.com/data/dish_images/d5ab931c8c239271de45e1c159af94311634805744.png"
             alt="Cakes Image"
           />
-          <a
-            href="/All_Background_Component/cake.html"
+          <Link
+            to="/All_Background_Component/cake.html"
             className="pizza-button"
           >
             Cakes
-          </a>
+          </Link>
         </div>
         <div className="box">
           <img
             src="https://b.zmtcdn.com/data/o2_assets/019409fe8f838312214d9211be010ef31678798444.jpeg"
             alt="North Indian Image"
           />
-          <a
-            href="/All_Background_Component/northindian.html"
+          <Link
+            to="/All_Background_Component/northindian.html"
             className="pizza-button"
           >
             North Indian
-          </a>
+          </Link>
         </div>
         <div className="box">
           <img
             src="https://b.zmtcdn.com/data/dish_images/197987b7ebcd1ee08f8c25ea4e77e20f1634731334.png"
             alt="Chicken Image"
           />
-          <a
-            href="/All_Background_Component/chicken.html"
+          <Link
+            to="/All_Background_Component/chicken.html"
             className="pizza-button"
           >
             Chicken
-          </a>
+          </Link>
         </div>
         <div className="box">
           <img
             src="https://b.zmtcdn.com/data/o2_assets/5dbdb72a48cf3192830232f6853735301632716604.png"
             alt="Momos Image"
           />
-          <a
-            href="/All_Background_Component/momos.html"
+          <Link
+            to="/All_Background_Component/momos.html"
             className="pizza-button"
           >
             Momos
-          </a>
+          </Link>
         </div>
         <div className="box">
           <img
             src="https://b.zmtcdn.com/data/dish_images/c2f22c42f7ba90d81440a88449f4e5891634806087.png"
             alt="Rolls Image"
           />
-          <a
-            href="/All_Background_Component/rolls.html"
+          <Link
+            to="/All_Background_Component/rolls.html"
             className="pizza-button"
           >
             Rolls
-          </a>
+          </Link>
         </div>
         <div className="box">
           <img
             src="https://b.zmtcdn.com/data/dish_images/e44c42ff4b60b025225c8691ef9735b11635781903.png"
             alt="Paneer Image"
           />
-          <a
-            href="/All_Background_Component/paneer.html"
+          <Link
+            to="/All_Background_Component/paneer.html"
             className="pizza-button"
           >
             Paneer
-          </a>
+          </Link>
         </div>
       </div>
 
