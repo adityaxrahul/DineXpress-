@@ -22,6 +22,16 @@ export default function Login() {
           }),
         },
       );
+      // Ensure we only parse JSON if it is actually JSON
+      if (!response.ok) {
+        const text = await response.text();
+        if (response.status === 500) {
+          alert("Backend is online but threw a 500 Internal Error. Your database might be disconnected or your JWT_SECRET is missing on Render!");
+          return;
+        }
+        alert(`Server Error: ${text}`);
+        return;
+      }
       const json = await response.json();
       if (json.success) {
         localStorage.setItem("token", json.authtoken);
@@ -30,12 +40,12 @@ export default function Login() {
         const returnTo = location.state?.returnTo || "/";
         navigate(returnTo);
       } else {
-        alert("Invalid credentials");
+        alert(json.error || "Invalid credentials");
       }
     } catch (error) {
       console.error(error);
       alert(
-        "Error connecting to the server. Please ensure backend is running.",
+        "Network connection failed entirely. Please ensure backend is running.",
       );
     }
   };
