@@ -32,20 +32,23 @@ export default function AdminPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
     if (isEditing) {
       try {
-        const response = await fetch(
-          `/api/food/update/${formData.id}`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name: formData.name,
-              category: formData.category,
-              price: formData.price,
-            }),
-          },
-        );
+        const response = await fetch(`${API_URL}/api/food/update/${formData.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            category: formData.category,
+            price: formData.price,
+          }),
+        });
+        if (!response.ok) {
+           alert("Could not update. Render server is waking up or disconnected.");
+           return;
+        }
         const json = await response.json();
         if (json.success) {
           alert("Item updated successfully!");
@@ -55,21 +58,23 @@ export default function AdminPage() {
         }
       } catch (e) {
         console.error(e);
+        alert("Server communication error.");
       }
     } else {
       try {
-        const response = await fetch(
-          "/api/food/add",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name: formData.name,
-              category: formData.category,
-              price: formData.price,
-            }),
-          },
-        );
+        const response = await fetch(`${API_URL}/api/food/add`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            category: formData.category,
+            price: formData.price,
+          }),
+        });
+        if (!response.ok) {
+           alert("Could not add item. Render server is waking up. Please try again.");
+           return;
+        }
         const json = await response.json();
         if (json.success) {
           alert("Item added successfully!");
@@ -78,6 +83,7 @@ export default function AdminPage() {
         }
       } catch (e) {
         console.error(e);
+        alert("Server communication error.");
       }
     }
   };
@@ -94,11 +100,13 @@ export default function AdminPage() {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this item?")) return;
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
     try {
-      const response = await fetch(
-        `/api/food/delete/${id}`,
-        { method: "DELETE" },
-      );
+      const response = await fetch(`${API_URL}/api/food/delete/${id}`, { method: "DELETE" });
+      if (!response.ok) {
+         alert("Could not delete. Check Render server.");
+         return;
+      }
       const json = await response.json();
       if (json.success) {
         alert("Item deleted successfully!");
@@ -106,6 +114,7 @@ export default function AdminPage() {
       }
     } catch (e) {
       console.error(e);
+      alert("Server communication error.");
     }
   };
 
