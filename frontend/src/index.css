@@ -717,3 +717,70 @@ nav a {
 html {
   scroll-behavior: smooth;
 }
+
+/* Comprehensive Mobile & Tablet Responsiveness fixes */
+@media (max-width: 650px) {
+  .box {
+    width: 100% !important;
+    max-width: 320px;
+    height: auto !important;
+    padding: 20px 0;
+    margin: 1rem auto;
+  }
+  
+  .photo {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+  }
+
+  .reservation form {
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .hero-buttons a {
+    text-align: center;
+  }
+
+  .nav23 {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .links a, .links button {
+    margin: 0 !important;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+
+  h1, h2 {
+    font-size: 2rem !important;
+  }
+
+  .chef img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .chef-text button, .reservation button {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 15px;
+  }
+}
