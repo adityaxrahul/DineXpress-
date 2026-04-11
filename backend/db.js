@@ -7,7 +7,6 @@ const connectToMongo = async () => {
     console.log("Connected to MongoDB Compass successfully");
   } catch (error) {
     console.error("Failed to connect to MongoDB", error);
-    process.exit(1);
   }
 };
 

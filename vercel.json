@@ -10,7 +10,7 @@
     }
   ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://dinexpress-6ric.onrender.com/api/$1" },
+    { "source": "/api/(.*)", "destination": "https://dinexpress-6r1c.onrender.com/api/$1" },
     { "source": "/assets/(.*)", "destination": "/frontend/assets/$1" },
     { "source": "/(.*)", "destination": "/frontend/index.html" }
   ]
