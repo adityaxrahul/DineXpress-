@@ -11,6 +11,9 @@ export default function Singup() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // ✅ Works for BOTH local + production
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (credentials.password !== credentials.confirmPassword) {
@@ -19,20 +22,38 @@ export default function Singup() {
     }
 
     try {
-      const response = await fetch(
-        "/api/auth/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: credentials.name,
-            email: credentials.email,
-            password: credentials.password,
-          }),
+      const response = await fetch(`${API_URL}/api/auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          name: credentials.name,
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
+
+      // ❗ Handle server errors cleanly without crashing
+      if (!response.ok) {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+           const json = await response.json();
+           alert(json.error || "Invalid Details");
+           return;
+        }
+
+        const text = await response.text();
+        if (response.status === 500 || response.status === 503) {
+          alert(
+            "Backend error or waking up. Check MongoDB on Render."
+          );
+          return;
+        }
+        alert(`Server Error: ${text}`);
+        return;
+      }
+
       const json = await response.json();
       if (json.success) {
         localStorage.setItem("token", json.authtoken);
@@ -45,7 +66,7 @@ export default function Singup() {
     } catch (error) {
       console.error(error);
       alert(
-        "Error connecting to the server. Please ensure backend is running.",
+        "Cannot connect to backend.\n\n👉 Open backend URL first (Render sleep issue)."
       );
     }
   };
