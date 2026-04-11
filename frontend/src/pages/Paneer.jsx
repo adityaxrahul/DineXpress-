@@ -36,8 +36,7 @@ export default function Paneer() {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await fetch(
-          "/api/food/fetchall",
+        const response = await fetch((import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/food/fetchall",
         );
         const json = await response.json();
         if (json.success) {
