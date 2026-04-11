@@ -23,7 +23,7 @@ export default function Reservation() {
     }
     try {
       const response = await fetch(
-        "/api/reservation/book",
+        (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/reservation/book",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

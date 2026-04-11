@@ -50,21 +50,25 @@ function Home() {
       return;
     }
     try {
-      const response = await fetch("/api/reservation/book", {
+      const response = await fetch((import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/reservation/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reservation)
       });
+      if (!response.ok) {
+        alert("Cannot process right now. Database is currently disconnected from Render backend.");
+        return;
+      }
       const json = await response.json();
       if (json.success) {
-        alert("Table Reserved Successfully! Your reservation is stored in the database.");
+        alert("Table Reserved Successfully!");
         setReservation({ name: '', email: '', guests: '', request: '' });
       } else {
         alert("Failed to reserve table.");
       }
     } catch (error) {
       console.error(error);
-      alert("Error connecting to server.");
+      alert("Please wait. The backend is waking up right now.");
     }
   };
 

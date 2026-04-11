@@ -25,7 +25,7 @@ export default function Cart() {
 
     try {
       const response = await fetch(
-        "/api/order/place",
+        (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/order/place",
         {
           method: "POST",
           headers: {
@@ -35,12 +35,22 @@ export default function Cart() {
           body: JSON.stringify({ items, totalAmount }),
         },
       );
+
+      if (!response.ok) {
+         if (response.status === 401) {
+            alert("Session expired, please login again.");
+            return;
+         }
+         alert("Cannot process order right now. Database is currently disconnected from Render backend.");
+         return;
+      }
+
       const json = await response.json();
 
       if (json.success) {
         clearCart();
         alert(
-          "Your order has been placed successfully in the database! Total: ₹" +
+          "Your order has been placed successfully! Total: ₹" +
             totalAmount,
         );
       } else {
@@ -48,7 +58,7 @@ export default function Cart() {
       }
     } catch (error) {
       console.error(error);
-      alert("Error communicating with DB server.");
+      alert("Please wait. The backend is waking up right now.");
     }
   };
 

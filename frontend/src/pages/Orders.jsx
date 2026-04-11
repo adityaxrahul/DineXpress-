@@ -11,7 +11,7 @@ export default function Orders() {
   const fetchOrders = async () => {
     try {
       const response = await fetch(
-        "/api/order/fetchall",
+        (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/order/fetchall",
         {
           headers: {
             "auth-token": localStorage.getItem("token"),
